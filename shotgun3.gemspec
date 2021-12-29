@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
-  s.name = 'shotgun'
-  s.version = '0.9.2'
+  s.name = 'shotgun3'
+  s.version = '1.0.0'
 
-  s.description = "Reloading Rack development server"
-  s.summary     = s.description
+  s.description = "Reloading Rack development server (Ruby 3 compatible)"
+  s.summary     = "This is probably a temporary fork, until the official gem supports Ruby 3. There's already a pending PR for this change but it's been there for a while"
 
   s.license = "MIT"
 
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
-  s.add_dependency 'rack',    '>= 1.0'
+  s.add_dependency 'rack',    '~> 2.1'
 
   s.homepage = "https://github.com/rtomayko/shotgun"
 end
