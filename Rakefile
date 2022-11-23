@@ -5,7 +5,7 @@ task :default => [:test]
 
 Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/test_shotgun_*.rb']
-  t.ruby_opts = ['-rubygems'] if defined? Gem
+  t.ruby_opts = ['-r rubygems'] if defined? Gem
 end
 
 desc "build manual"
@@ -15,7 +15,7 @@ task :man do
 end
 
 require 'rubygems'
-SPEC = eval(File.read('shotgun.gemspec'))
+SPEC = eval(File.read('shotgun3.gemspec'))
 PACK = "#{SPEC.name}-#{SPEC.version}"
 
 desc 'build packages'
@@ -23,8 +23,8 @@ task :package => %W[pkg/#{PACK}.gem pkg/#{PACK}.tar.gz]
 
 directory 'pkg/'
 
-file "pkg/#{PACK}.gem" => %w[pkg/ shotgun.gemspec] + SPEC.files do |f|
-  sh "gem build shotgun.gemspec"
+file "pkg/#{PACK}.gem" => %w[pkg/ shotgun3.gemspec] + SPEC.files do |f|
+  sh "gem build shotgun3.gemspec"
   mv File.basename(f.name), f.name
 end
 
