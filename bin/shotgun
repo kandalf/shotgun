@@ -2,6 +2,13 @@
 
 require 'optparse'
 
+begin
+  require 'rackup'
+  puts "Using the new Rackup::Handler"
+rescue LoadError
+  puts "Rackup is not available using Rack::Handler"
+end
+
 env = ENV['RACK_ENV'] || 'development'
 host = ENV['HOST'] || '127.0.0.1'
 port = ENV['PORT'] || 9393
@@ -109,7 +116,8 @@ require 'rack'
 require 'shotgun'
 
 require 'thin' if server.to_s.downcase == 'thin'
-server = Rack::Handler.get(server) || Rack::Handler.default
+handler = defined?(Rackup::Handler) ? Rackup::Handler : Rack::Handler
+server = handler.get(server) || handler.default
 
 app =
   Rack::Builder.new do
